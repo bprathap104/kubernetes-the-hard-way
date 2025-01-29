@@ -1,0 +1,4 @@
+34.123.223.64 server.kubernetes.local server  
+35.239.109.133 node-0.kubernetes.local node-0 10.200.0.0/24
+34.45.249.121 node-1.kubernetes.local node-1 10.200.1.0/24
+
