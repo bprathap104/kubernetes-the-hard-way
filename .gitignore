@@ -49,3 +49,6 @@ service-account.pem
 service-account-csr.json
 *.swp
 .idea/
+vms/service-account.json
+vms/service-account.json
+vms/service-account.json
