@@ -21,7 +21,7 @@ Generate the CA configuration file, certificate, and private key:
 ```bash
 {
   openssl genrsa -out ca.key 4096
-  openssl req -x509 -new -sha512 -nodes \
+  openssl req -x509 -new -sha512 -noenc \
     -key ca.key -days 3653 \
     -config ca.conf \
     -out ca.crt
@@ -51,38 +51,19 @@ certs=(
 ```
 
 ```bash
-for i in "${certs[@]}"; do
-  # Generate private key
+for i in ${certs[*]}; do
   openssl genrsa -out "${i}.key" 4096
 
-  # Generate Certificate Signing Request (CSR)
-  openssl req -new \
-    -key "${i}.key" \
-    -sha256 \
-    -config ca.conf \
-    -subj "/CN=${i}" \
+  openssl req -new -key "${i}.key" -sha256 \
+    -config "ca.conf" -section ${i} \
     -out "${i}.csr"
-
-  # Determine the correct extension section
-  EXT_SECTION="${i}_req_extensions"  # Most sections use this pattern
-
-  # Check if a matching extension section exists
-  if ! grep -q "^\[$EXT_SECTION\]" ca.conf; then
-    echo "Warning: Extension section [$EXT_SECTION] not found in ca.conf. Using default."
-    EXT_SECTION="default_req_extensions"
-  fi
-
-  # Sign the certificate
-  openssl x509 -req \
-    -days 3653 \
-    -in "${i}.csr" \
-    -sha256 \
-    -CA "ca.crt" \
+  
+  openssl x509 -req -days 3653 -in "${i}.csr" \
+    -copy_extensions copyall \
+    -sha256 -CA "ca.crt" \
     -CAkey "ca.key" \
     -CAcreateserial \
-    -out "${i}.crt" \
-    -extfile ca.conf \
-    -extensions "$EXT_SECTION"
+    -out "${i}.crt"
 done
 ```
 
@@ -100,7 +81,7 @@ Copy the appropriate certificates and private keys to the `node-0` and `node-1` 
 
 ```bash
 for host in node-0 node-1; do
-  ssh root@$host mkdir -p /var/lib/kubelet/
+  ssh root@$host mkdir /var/lib/kubelet/
   
   scp ca.crt root@$host:/var/lib/kubelet/
     
