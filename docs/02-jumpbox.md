@@ -26,7 +26,7 @@ Now it's time to download a copy of this tutorial which contains the configurati
 
 ```bash
 git clone --depth 1 \
-  https://github.com/kelseyhightower/kubernetes-the-hard-way.git
+  https://github.com/bprathap104/kubernetes-the-hard-way.git
 ```
 
 Change into the `kubernetes-the-hard-way` directory:

@@ -21,7 +21,7 @@ Generate the CA configuration file, certificate, and private key:
 ```bash
 {
   openssl genrsa -out ca.key 4096
-  openssl req -x509 -new -sha512 -noenc \
+  openssl req -x509 -new -sha512 -nodes \
     -key ca.key -days 3653 \
     -config ca.conf \
     -out ca.crt

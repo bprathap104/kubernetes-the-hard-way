@@ -47,6 +47,10 @@ rm -f /etc/ssh/sshd_config.d/*
 sed -i \
   's/^#PermitRootLogin.*/PermitRootLogin yes/' \
   /etc/ssh/sshd_config
+sed -i \
+  's/^#PasswordAuthentication.*/PasswordAuthentication yes/' \
+  /etc/ssh/sshd_config
+
 ```
 
 Restart the `sshd` SSH server to pick up the updated configuration file:
@@ -173,7 +177,7 @@ cat hosts >> /etc/hosts
 Verify that the `/etc/hosts` file has been updated:
 
 ```bash
-cat /etc/hosts
+  cat /etc/hosts
 ```
 
 ```text
