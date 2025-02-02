@@ -43,6 +43,7 @@ su - root
 Edit the `/etc/ssh/sshd_config` SSH daemon configuration file and set the `PermitRootLogin` option to `yes`:
 
 ```bash
+rm -f /etc/ssh/sshd_config.d/*
 sed -i \
   's/^#PermitRootLogin.*/PermitRootLogin yes/' \
   /etc/ssh/sshd_config

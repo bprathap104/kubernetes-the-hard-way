@@ -6,6 +6,8 @@ In this lab you will generate [Kubernetes client configuration files](https://ku
 
 In this section you will generate kubeconfig files for the `kubelet` and the `admin` user.
 
+![alt text](image-1.png)
+
 ### The kubelet Kubernetes Configuration File
 
 When generating kubeconfig files for Kubelets the client certificate matching the Kubelet's node name must be used. This will ensure Kubelets are properly authorized by the Kubernetes [Node Authorizer](https://kubernetes.io/docs/admin/authorization/node/).

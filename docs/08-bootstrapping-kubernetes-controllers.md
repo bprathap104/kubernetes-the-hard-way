@@ -2,6 +2,8 @@
 
 In this lab you will bootstrap the Kubernetes control plane. The following components will be installed on the controller machine: Kubernetes API Server, Scheduler, and Controller Manager.
 
+![alt text](image-2.png)
+
 ## Prerequisites
 
 Connect to the `jumpbox` and copy Kubernetes binaries and systemd unit files to the `server` instance:
